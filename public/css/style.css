@@ -1,0 +1,76 @@
+.header{
+    margin-top: 20px;
+    margin-bottom: 20px;
+   
+   
+}
+
+
+
+.header .inner-menu ul {
+    display: flex;
+    list-style-type: none;
+    padding: 10px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+   
+
+}
+.header .inner-menu ul li {
+    margin-left: 20px;
+}
+
+.footer{
+    background: black;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 20px;
+
+}
+
+
+/* css danh sách sản phẩm  */
+.box-head .inner-title {
+    margin-bottom: 30px;
+}
+
+.product-item {
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 100%;
+}
+.product-item .inner-img{
+    width: 100%;
+    aspect-ratio: 4/3;
+
+}
+.product-item .inner-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.product-item .inner-content{
+    margin-left: 20px;
+
+}
+
+.product-item .inner-content .inner-price-ole {
+    text-decoration: line-through;
+    color: red;
+    background: gray;
+    width: 40px;
+    padding: 5px;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 20px;
+}
+
