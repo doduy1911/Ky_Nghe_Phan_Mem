@@ -12,5 +12,5 @@ const productSchema = new mongoose.Schema({
     deleted:Boolean
 })
 
-const Product = mongoose.model('Product',productSchema,BE_24);
+const Product = mongoose.model('Product',productSchema,"Products");
 module.exports = Product;

@@ -35,13 +35,15 @@
 /* css danh sách sản phẩm  */
 .box-head .inner-title {
     margin-bottom: 30px;
+    
 }
 
 .product-item {
     border: 1px solid black;
     border-radius: 20px;
     width: 100%;
-}
+    margin-bottom: 20px;
+    height: 290px}
 .product-item .inner-img{
     width: 100%;
     aspect-ratio: 4/3;
@@ -72,5 +74,18 @@
     margin-bottom: 10px;
     position: absolute;
     top: 20px;
+}
+
+.product-item .inner-content .inner-title {
+    font-size: 20px;
+}
+
+.product-item .inner-content .inner-discount{
+    background: red;
+    width: 60px;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 10px;
+
 }
 

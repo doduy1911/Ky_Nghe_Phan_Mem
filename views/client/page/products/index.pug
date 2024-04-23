@@ -6,30 +6,13 @@ block main
                 .box-head   
                     h2.inner-title Danh Sách Sách Sản Phẩm 
         .row 
-            .col-4.mb3 
-                .product-item   
-                    .inner-img
-                        img(src="/img/quynh.jpg", alt="Quỳnh Đầu Đất", srcset="")
-                    .inner-content 
-                        h3.inner-title Quỳnh 
-                        .inner-price-new 22$
-                        .inner-price-ole 12$
-                        .inner-discount -11%
-            .col-4.mb3 
-                .product-item   
-                    .inner-img
-                        img(src="/img/quynh.jpg", alt="Quỳnh Đầu Đất", srcset="")
-                    .inner-content 
-                        h3.inner-title Quỳnh 
-                        .inner-price-new 22$
-                        .inner-price-ole 12$
-                        .inner-discount -11%
-            .col-4.mb3 
+            each item in product
+                .col-4.mb3 
                     .product-item   
                         .inner-img
-                            img(src="/img/quynh.jpg", alt="Quỳnh Đầu Đất", srcset="")
+                            img(src=item.thumbnail, alt="", srcset="")
                         .inner-content 
-                            h3.inner-title Quỳnh 
-                            .inner-price-new 22$
-                            .inner-price-ole 12$
-                            .inner-discount -11%
+                            h3.inner-title #{item.title}
+                            .inner-price-new #{item.priceNew} $
+                            .inner-price-ole #{item.price}
+                            .inner-discount #{item.discountPercentage}
