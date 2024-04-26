@@ -1,0 +1,27 @@
+extends ../../layout/default.pug
+
+block main 
+    h1(class="mb-4") Danh Sách Sản Phẩm 
+    table.table.table-hover.table-sm 
+        thead 
+            tr 
+                th STT 
+                th Hình Ảnh 
+                th Tiêu Đề
+                th Giá 
+                th Trạng Thái 
+                th Hành Động
+        tbody
+            each item in products
+                tr 
+                    td #{item.id}
+                    td 
+                        img(
+                            src=`#{item.thumbnail}`, alt="ảnh "
+                            )
+                    td 
+                    td 
+                    td 
+                    td 
+
+        

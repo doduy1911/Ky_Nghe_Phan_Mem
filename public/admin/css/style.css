@@ -1,0 +1,44 @@
+.header {
+    background: #202020;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+      z-index: 999;
+  }
+  
+  .header .inner-logo a {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+  }
+  /* End Header */
+  
+  /* Body */
+  .body .sider {
+    width: 150px;
+    background: #323232;
+    color: #fff;
+    height: calc(100vh - 56px);
+    position: fixed;
+    top: 56px;
+    left: 0;
+  }
+  
+  .body .main {
+    margin: 15px;
+    position: relative;
+    left: 150px;
+    width: calc(100% - 180px);
+  }
+
+  .footer {
+    background:red;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    bottom: 0px;
+      z-index: 999;
+  }
