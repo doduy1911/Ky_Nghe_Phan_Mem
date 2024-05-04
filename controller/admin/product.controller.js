@@ -47,13 +47,26 @@ module.exports.index = async (req, res) => {
     if (req.query.status) {
         find.status = req.query.status
 
+    } 
+    let keyword = ""
+    if (req.query.keyword) {
+        keyword=req.query.keyword
+
+        const regex = new RegExp(keyword,"i")
+        find.title = regex
+
+        console.log(regex)
+
     }
+
+
     // lọc 
     const products = await Products1.find(find);
     res.render("admin/page/product/index.pug", {
         pageTitleAdmin: "Trang Chủ ",
         products: products,
-        fiterStatus: fiterStatus
+        fiterStatus: fiterStatus,
+        keyword:keyword
     });
 
 }
