@@ -56,17 +56,23 @@ block main
                             td  
                                 if(item.status == "active")
                                     a(
-                                        href=`/doduy/product/inactive/${item.id}`
+                                        href=`/doduy/product/change-status/inactive/${item.id}`
                                         class="badge badge-success"
                                     ) Hoạt Động
                                 else 
                                     a(
-                                        href=`/doduy/product/active/${item.id}`
+                                        href=`/doduy/product/change-status/active/${item.id}`
                                         class="badge badge-danger"
                                     )  Dừng Hoạt Động
                             
                             td  
                                 button(class="btn btn-warning btn-sm") Sửa
                                 button(class="btn btn-danger btn-sm ml-1") Xóa
+    //- form(
+    //-     id="form-change-status"
+    //-     action=""
+    //-     method="GET"
+    //-     data-path=`/${prefixAdmin}/product/change-status/active/${item.id}`
+    //- ) Gửi
     //- div #{Pagination.totalPage}
     +pagination(pagination)

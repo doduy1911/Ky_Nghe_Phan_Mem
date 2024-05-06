@@ -5,7 +5,7 @@ const controllerproduct = require('../../controller/admin/product.controller.js'
 
 
 router.get('/',controllerproduct.index)
-router.get('/:status/:id',controllerproduct.changeStatus)
+router.get('/change-status/:status/:id',controllerproduct.changeStatus)
 
 
 module.exports = router; 
