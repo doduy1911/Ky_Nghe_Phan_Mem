@@ -1,4 +1,7 @@
 extends ../../layout/default.pug
+include ../../mixins/fiterStatus.pug
+include ../../mixins/pagination.pug
+
 
 block main 
     h1(class="mb-4") Danh Sách Sản Phẩm 
@@ -6,11 +9,24 @@ block main
     .card.mb-3  
         .card-header Bộ Lọc Và Tìm Kiếm 
         .card-body 
-            each item in fiterStatus
-                button(
-                    class=`btn btn-sm ml-l btn-outline-success ${item.class}`
-                    button-status=item.status
-                ) #{item.name}
+            .row 
+                .col-6
+                    +fiter-Status(fiterStatus)
+                .col-6 
+                    form(id="form-search")
+                        .input-group
+                            input(
+                                type="text",
+                                class="form-control",
+                                placeholder="Nhập tên sản phẩm",
+                                name="keyword"
+                                value=keyw ord
+                            )
+                            .input-group-append
+                                button(
+                                    class="btn btn-success",
+                                    type="submit"
+                                ) Tìm 
                 
     .card.mb-3 
         .card-header Danh Sách 
@@ -46,3 +62,5 @@ block main
                             td  
                                 button(class="btn btn-warning btn-sm") Sửa
                                 button(class="btn btn-danger btn-sm ml-1") Xóa
+    //- div #{Pagination.totalPage}
+    +pagination(pagination)

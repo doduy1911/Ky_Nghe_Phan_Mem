@@ -1,44 +1,15 @@
 const Product = require("../../model/products.model.BE_24")
 const Products1 = require("../../model/products1.model.BE_24")
-console.log(Products1)
+const fiterStatusHelper = require("../../helper/fiterStatus.js")
+const pagination = require("../../helper/pagination.js")
+
 // [GET] /admin/products
 module.exports.index = async (req, res) => {
     // tạo ra một mảng các nút bấm
-    let fiterStatus = [
-        {
-            
-            name: "Tất Cả",
-            status: "",
-            class:""
-        },
-        {
-            
-            name: "Hoạt Động",
-            status: "active",
-            class:""
-        },
-        {
-            
-            name: "Dừng Hoạt Động ",
-            status: "inactive",
-            class:""
-        }
-    ]
-// nếu người dùng gửi status lên url
-    if(req.query.status){
-        // tìm đến object tương ứng 
-        const index = fiterStatus.findIndex((item) => {
-            return item.status == req.query.status;
-        }) ;
-        // cập nhật lại status
-        fiterStatus[index].class = "active"
-    }else{
-        const index = fiterStatus.findIndex((item) => {
-            return item.status == "";
-        }) ;
-        fiterStatus[index].class = "active"
-    }
- 
+    const fiterStatus = fiterStatusHelper(req.query)
+
+
+    // tạo ra oject find để lọc sản phẩm 
     let find = {
         deleted: false,
     }
@@ -47,13 +18,32 @@ module.exports.index = async (req, res) => {
     if (req.query.status) {
         find.status = req.query.status
 
+    } 
+
+    let keyword = ""
+    if (req.query.keyword) {
+        keyword=req.query.keyword
+
+        const regex = new RegExp(keyword,"i")
+        find.title = regex
+
+        // console.log(regex)
+
     }
-    // lọc 
-    const products = await Products1.find(find);
+
+
+
+// pagination phan trang 
+  const countProducts = await Products1.countDocuments(find)
+  const objectPagination = pagination(req.query,countProducts)
+//   end pagination
+    const products = await Products1.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip);
     res.render("admin/page/product/index.pug", {
         pageTitleAdmin: "Trang Chủ ",
         products: products,
-        fiterStatus: fiterStatus
+        fiterStatus: fiterStatus,
+        keyword:keyword,
+        Pagination:objectPagination
     });
 
 }
