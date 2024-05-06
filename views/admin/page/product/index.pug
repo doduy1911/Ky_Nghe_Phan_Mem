@@ -1,5 +1,7 @@
 extends ../../layout/default.pug
 include ../../mixins/fiterStatus.pug
+include ../../mixins/pagination.pug
+
 
 block main 
     h1(class="mb-4") Danh Sách Sản Phẩm 
@@ -61,23 +63,4 @@ block main
                                 button(class="btn btn-warning btn-sm") Sửa
                                 button(class="btn btn-danger btn-sm ml-1") Xóa
     //- div #{Pagination.totalPage}
-    nav 
-        ul(class="pagination")
-            if(Pagination.currentpage > 1 ) 
-                li(class="page-item") 
-                    button(
-                        class="page-link"
-                        button-pagination= Pagination.currentpage - 1 
-                        ) <i class="fa-solid fa-angles-left"></i>
-            - for (var i =Math.max(1, Pagination.currentpage - 1 ) ;i <= Math.min(Pagination.totalPage,  Pagination.currentpage + 1 ); i++) 
-                li(class=`page-item ${Pagination.currentpage == i ? "active" : ""}`) 
-                    button(
-                        class="page-link"
-                        button-pagination=i
-                        ) #{i}
-            if(Pagination.currentpage < Pagination.totalPage)
-                li(class="page-item") 
-                    button(
-                        class="page-link"
-                        button-pagination= Pagination.currentpage + 1 
-                        ) <i class="fa-solid fa-forward"></i>
+    +pagination(pagination)

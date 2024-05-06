@@ -1,0 +1,21 @@
+mixin pagination(pagination)
+    nav 
+        ul(class="pagination")
+            if(Pagination.currentpage > 1 ) 
+                li(class="page-item") 
+                    button(
+                        class="page-link"
+                        button-pagination= Pagination.currentpage - 1 
+                        ) <i class="fa-solid fa-angles-left"></i>
+            - for (var i =Math.max(1, Pagination.currentpage - 1 ) ;i <= Math.min(Pagination.totalPage,  Pagination.currentpage + 1 ); i++) 
+                li(class=`page-item ${Pagination.currentpage == i ? "active" : ""}`) 
+                    button(
+                        class="page-link"
+                        button-pagination=i
+                        ) #{i}
+            if(Pagination.currentpage < Pagination.totalPage)
+                li(class="page-item") 
+                    button(
+                        class="page-link"
+                        button-pagination= Pagination.currentpage + 1 
+                        ) <i class="fa-solid fa-forward"></i>
