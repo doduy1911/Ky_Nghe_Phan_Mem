@@ -42,3 +42,26 @@ if(formSearch){
 
     
 }
+
+
+// pagination phân trang 
+
+const buttonPagination = document.querySelectorAll("[button-pagination")
+// console.log(buttonPagination)
+
+if(buttonPagination.length > 0) {
+   buttonPagination.forEach(button => {
+    button.addEventListener("click",()=>{
+        // console.log(button)
+        const page = button.getAttribute("button-pagination");
+        // console.log(page)
+
+        let url = new URL(window.location.href);
+        url.searchParams.set("page", page)
+        window.location.href = url.href
+    })
+   })
+}
+// end pagination phân trang
+
+
