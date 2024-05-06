@@ -1,0 +1,6 @@
+mixin fiter-Status(fiterStatus)
+    each item in fiterStatus
+                        button(
+                            class=`btn btn-sm ml-l btn-outline-success ${item.class}`
+                            button-status=item.status
+                        ) #{item.name}
