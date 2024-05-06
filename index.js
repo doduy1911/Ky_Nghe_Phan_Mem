@@ -4,7 +4,8 @@ require("dotenv").config();
 const database = require("./config/database.js")
 const sysconfig = require("./config/system.js");
 database.connect();
-
+var methodOverride = require('method-override')
+app.use(methodOverride('_method'))
 
 
 const router = require("./router/client/index.router.js");
@@ -15,10 +16,9 @@ app.use(express.static("public"))
 app.locals.prefixAdmin=  sysconfig.prefixAdmin;
 router(app)
 // routerAdmin(app)
-
-
 app.set('views',"./views");
 app.set("view engine","pug")
+
 app.listen(port, ()=>{
     console.log(`lắng Nghe Cổng ${port}`);
 });

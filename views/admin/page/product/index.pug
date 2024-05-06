@@ -31,6 +31,9 @@ block main
     .card.mb-3 
         .card-header Danh Sách 
         .card-body 
+            form(
+                action=""
+                ) Áp Dụng 
             table.table.table-hover.table-sm 
                 thead 
                     tr 
@@ -55,24 +58,28 @@ block main
                             td #{item.price}$
                             td  
                                 if(item.status == "active")
-                                    a(
-                                        href=`/doduy/product/change-status/inactive/${item.id}`
+                                    button(
                                         class="badge badge-success"
+                                        button-change-status 
+                                        data-status=item.status 
+                                        data-id=item.id
                                     ) Hoạt Động
                                 else 
-                                    a(
-                                        href=`/doduy/product/change-status/active/${item.id}`
+                                    button(
                                         class="badge badge-danger"
+                                        button-change-status 
+                                        data-status=item.status 
+                                        data-id=item.id
                                     )  Dừng Hoạt Động
                             
                             td  
                                 button(class="btn btn-warning btn-sm") Sửa
                                 button(class="btn btn-danger btn-sm ml-1") Xóa
-    //- form(
-    //-     id="form-change-status"
-    //-     action=""
-    //-     method="GET"
-    //-     data-path=`/${prefixAdmin}/product/change-status/active/${item.id}`
-    //- ) Gửi
-    //- div #{Pagination.totalPage}
+    form(
+        id="form-change-status"
+        method="POST"
+        action=""
+        data-path=`/${prefixAdmin}/product/change-status`
+    )
+    div #{Pagination.totalPage}
     +pagination(pagination)
