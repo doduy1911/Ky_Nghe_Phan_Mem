@@ -55,9 +55,15 @@ block main
                             td #{item.price}$
                             td  
                                 if(item.status == "active")
-                                    a(href="#" class="badge badge-success") Hoạt Động
+                                    a(
+                                        href=`/doduy/product/inactive/${item.id}`
+                                        class="badge badge-success"
+                                    ) Hoạt Động
                                 else 
-                                    a(href="#" class="badge badge-danger")  Dừng Hoạt Động
+                                    a(
+                                        href=`/doduy/product/active/${item.id}`
+                                        class="badge badge-danger"
+                                    )  Dừng Hoạt Động
                             
                             td  
                                 button(class="btn btn-warning btn-sm") Sửa
