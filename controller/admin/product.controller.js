@@ -18,13 +18,13 @@ module.exports.index = async (req, res) => {
     if (req.query.status) {
         find.status = req.query.status
 
-    } 
+    }
 
     let keyword = ""
     if (req.query.keyword) {
-        keyword=req.query.keyword
+        keyword = req.query.keyword
 
-        const regex = new RegExp(keyword,"i")
+        const regex = new RegExp(keyword, "i")
         find.title = regex
 
         // console.log(regex)
@@ -33,26 +33,25 @@ module.exports.index = async (req, res) => {
 
 
 
-// pagination phan trang 
-  const countProducts = await Products1.countDocuments(find)
-  const objectPagination = pagination(req.query,countProducts)
-//   end pagination
+    // pagination phan trang 
+    const countProducts = await Products1.countDocuments(find)
+    const objectPagination = pagination(req.query, countProducts)
+    //   end pagination
     const products = await Products1.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip);
     res.render("admin/page/product/index.pug", {
         pageTitleAdmin: "Trang Chủ ",
         products: products,
         fiterStatus: fiterStatus,
-        keyword:keyword,
-        Pagination:objectPagination
+        keyword: keyword,
+        Pagination: objectPagination
     });
 
-}
-
-module.exports.changeStatus = async(req,res) => {
+}   
+// [GET] /admin/change-status/products
+module.exports.changeStatus = async (req, res) => {
     const status = req.params.status
     const id = req.params.id
-
-    await Products1.updateOne({_id:id},{status:status})
+    await Products1.updateOne({ _id: id }, { status: status })
     res.redirect("back")
 
 } 
