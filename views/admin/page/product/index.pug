@@ -1,6 +1,8 @@
 extends ../../layout/default.pug
 include ../../mixins/fiterStatus.pug
 include ../../mixins/pagination.pug
+include ../../mixins/changeMulti.pug
+
 
 
 block main 
@@ -31,12 +33,15 @@ block main
     .card.mb-3 
         .card-header Danh Sách 
         .card-body 
-            form(
-                action=""
-                ) Áp Dụng 
-            table.table.table-hover.table-sm 
+            +changeMulti(`/${prefixAdmin}/product/change-multi?_method=PATCH`)
+            table(
+                class="table table-hover table-sm"
+                checkbox-multi
+                ) 
                 thead 
                     tr 
+                        th 
+                            input(type="checkbox" name="checkall")
                         th STT 
                         th Hình Ảnh 
                         th Tiêu Đề
@@ -46,6 +51,12 @@ block main
                 tbody
                     each item,index in products
                         tr 
+                            td  
+                                input(
+                                    type="checkbox"
+                                    name="id"
+                                    value=item.id
+                                )
                             td #{index + 1}
                             td 
                                 img(

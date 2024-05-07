@@ -5,7 +5,11 @@ const database = require("./config/database.js")
 const sysconfig = require("./config/system.js");
 database.connect();
 var methodOverride = require('method-override')
+var bodyParser = require('body-parser')
+
 app.use(methodOverride('_method'))
+app.use(bodyParser.urlencoded({ extended: false }))
+
 
 
 const router = require("./router/client/index.router.js");
