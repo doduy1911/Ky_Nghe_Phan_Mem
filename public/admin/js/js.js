@@ -149,6 +149,24 @@ if(formChangeMulti){
 // end form-change-multi
 
 // xóa cứng 
-const buttonDelete = document.querySelectorAll("[]")
+const buttonDelete = document.querySelectorAll("[button-delete]")
+if(buttonDelete.length > 0){
+    const formDleteitem = document.querySelector("#form-delete-item")
+    const path = formDleteitem.getAttribute("data-path")
+    buttonDelete.forEach(button => {
+        button.addEventListener("click",() => {
+            const checkDelete = confirm("Bạn có chắc muốn xóa không ? ")
+            if(checkDelete){
+                const id = button.getAttribute("data-id");
+            const action = path + `/${id}?_method=DELETE`;
+            formDleteitem.setAttribute("action",action)
+            formDleteitem.submit();
+            }
+
+        } )
+    })
+    
+
+}
 
 // end xóa cứng 

@@ -96,12 +96,12 @@ block main
         action=""
         data-path=`/${prefixAdmin}/product/change-status`
     )
-    div #{Pagination.totalPage}
+    
     form(
         id="form-delete-item"
         method="POST"
         action=""
         data-path=`/${prefixAdmin}/product/delete`
     )
-    div #{Pagination.totalPage}
+    
     +pagination(pagination)
