@@ -147,3 +147,8 @@ if(formChangeMulti){
     })
 }
 // end form-change-multi
+
+// xóa cứng 
+const buttonDelete = document.querySelectorAll("[]")
+
+// end xóa cứng 
