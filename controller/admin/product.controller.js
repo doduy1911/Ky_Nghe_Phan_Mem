@@ -2,6 +2,7 @@ const Product = require("../../model/products.model.BE_24")
 const Products1 = require("../../model/products1.model.BE_24")
 const fiterStatusHelper = require("../../helper/fiterStatus.js")
 const pagination = require("../../helper/pagination.js")
+const systemconfig = require("../../config/system.js")
 
 // [GET] /admin/products
 module.exports.index = async (req, res) => {
@@ -94,20 +95,47 @@ module.exports.changeMulti = async (req, res) => {
  
 }
 // xóa cứng 
-// module.exports.deleteItem = async (req , res) => {
-//     const id = req.params.id
-//     await Products1.deleteOne({ _id: id })
-//     res.redirect("back")
-// }
-
-// xóa mềm 
 module.exports.deleteItem = async (req , res) => {
     const id = req.params.id
-    await Products1.updateOne({ _id: id },{
-        deleted: true,
-        deletedAt: new Date()
-    })
-    res.redirect("back")
+    await Products1.deleteOne({ _id: id })
+    return res.redirect("back")
 }
 
+// xóa mềm 
+// module.exports.deleteItem = async (req , res) => {
+//     const id = req.params.id
+//     await Products1.updateOne({ _id: id },{
+//         deleted: true,
+//         deletedAt: new Date()
+//     })
+//     return res.redirect("back")
+// }
+
+module.exports.create = async (req , res) => {
+    res.render("./admin/page/product/create.pug",{
+        pageTitleAdmin: "Tạo Mới Sản Phẩm "
+    })
+}
 // end xóa mềm
+
+module.exports.createPost = async (req, res) => {
+    req.body.price = parseInt(req.body.price);
+    req.body.discountPercentage = parseInt(req.body.discountPercentage);
+    req.body.stock = parseInt(req.body.stock);
+
+    if (req.body.position === "") {
+        const countProduct = await Products1.countDocuments();
+        req.body.position = countProduct + 1;
+    } else {
+        req.body.position = parseInt(req.body.position);
+    }
+
+    const product1 = new Products1(req.body);
+
+    await product1.save();
+    req.flash('info', `Thêm Thành Công 1 Sản Phẩm `);
+    
+    res.redirect("/doduy/product");
+};
+
+

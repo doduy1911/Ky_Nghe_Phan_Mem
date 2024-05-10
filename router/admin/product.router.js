@@ -8,6 +8,11 @@ router.get('/',controllerproduct.index)
 router.patch("/change-status/:status/:id",controllerproduct.changeStatus);
 router.patch("/change-multi",controllerproduct.changeMulti);
 router.delete("/delete/:id",controllerproduct.deleteItem);
+router.get("/create",controllerproduct.create);
+
+router.post("/create",controllerproduct.createPost);
+
+
 
 
 
