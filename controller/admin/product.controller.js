@@ -52,6 +52,7 @@ module.exports.changeStatus = async (req, res) => {
     const status = req.params.status
     const id = req.params.id
     await Products1.updateOne({ _id: id }, { status: status })
+    req.flash('info', 'cập nhật trạng thái thành công ');
     res.redirect("back")
 
 } 
@@ -62,10 +63,24 @@ module.exports.changeMulti = async (req, res) => {
     switch (type) {
         case "active":
             await Products1.updateMany({_id:{$in:ids}} , {status:type})
+            req.flash('info', `Cập Nhật Trạng thái ${ids.length} sản phẩm thành Hoạt Động thành công `);
+
             break;
         
         case "inactive":
             await Products1.updateMany({_id:{$in:ids}} , {status:type})
+            req.flash('info', `Cập Nhật Trạng thái ${ids.length} sản phẩm thành Dừng Hoạt Động thành công `);
+
+            break;
+        
+        case "delete-all":
+            await Products1.updateMany({_id:{$in:ids}} ,
+                 {
+                    deleted:true,
+                    deleteAt: new Date()
+                })
+                req.flash('info', `xóa thành công  ${ids.length} sản phẩm `);
+
             break;
 
 
@@ -78,9 +93,21 @@ module.exports.changeMulti = async (req, res) => {
 
  
 }
+// xóa cứng 
+// module.exports.deleteItem = async (req , res) => {
+//     const id = req.params.id
+//     await Products1.deleteOne({ _id: id })
+//     res.redirect("back")
+// }
 
+// xóa mềm 
 module.exports.deleteItem = async (req , res) => {
     const id = req.params.id
-    await Products1.deleteOne({ _id: id })
+    await Products1.updateOne({ _id: id },{
+        deleted: true,
+        deletedAt: new Date()
+    })
     res.redirect("back")
 }
+
+// end xóa mềm

@@ -1,5 +1,12 @@
 const express = require("express");
+var flash = require('express-flash');
+var cookieParser = require('cookie-parser')
+var session = require('express-session')
+
 const app = express();
+app.use(cookieParser('messages'));
+app.use(session({ cookie: { maxAge: 1000 }}));
+app.use(flash());
 require("dotenv").config();
 const database = require("./config/database.js")
 const sysconfig = require("./config/system.js");
@@ -22,6 +29,10 @@ router(app)
 // routerAdmin(app)
 app.set('views',"./views");
 app.set("view engine","pug")
+
+// flast
+
+// end flash
 
 app.listen(port, ()=>{
     console.log(`lắng Nghe Cổng ${port}`);
