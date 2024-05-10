@@ -122,12 +122,22 @@ if (checkboxmulti) {
 // end checkbox multi
 // form-change-multi
 const formChangeMulti = document.querySelector("[form-change-multi]")
+// const typeChange =;
 if(formChangeMulti){
     formChangeMulti.addEventListener("submit", (e) =>{
         // dùng preventDefault để ngăn chặn sự kiện mặc định của form để không bị load lại form 
         e.preventDefault()
+
         const checkboxmulti = document.querySelector("[checkbox-multi]")
         const inputChecked = checkboxmulti.querySelectorAll("input[name='id']:checked");
+        const typeChange = e.target.elements.type.value;
+        if(typeChange == "delete-all") {
+            const ischeckdelete = confirm("bạn có chắc muốn xóa không ? ")
+            if(!ischeckdelete){
+                return;
+            }
+        }
+       
         if(inputChecked.length){
             let ids = [];
             const inputIds = formChangeMulti.querySelector("input[name='ids']")
@@ -170,3 +180,20 @@ if(buttonDelete.length > 0){
 }
 
 // end xóa cứng 
+const showAlert = document.querySelector("[show-alert")
+if(showAlert) {
+    const close_alert = showAlert.querySelector("[close-alert]")
+
+    const time = parseInt(showAlert.getAttribute("data-time")) || 3000;
+    setTimeout(() => {
+        showAlert.classList.add("alert-hidden")
+    }, time);
+
+    close_alert.addEventListener("click", () => {
+        showAlert.classList.add("alert-hidden")
+    })
+}
+
+// show alert
+
+// end show alert
