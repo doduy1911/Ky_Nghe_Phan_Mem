@@ -5,3 +5,13 @@ mixin alert()
         show-alert
         data-time=time
         ) #{messages.info} <span close-alert>x</span>
+mixin alert()
+    - if (messages.error)
+        div(
+        class="alert alert-danger"
+        show-alert
+        data-time=time
+        ) #{messages.error} <span close-alert>x</span>
+
+    
+    
