@@ -38,7 +38,11 @@ module.exports.index = async (req, res) => {
     const countProducts = await Products1.countDocuments(find)
     const objectPagination = pagination(req.query, countProducts)
     //   end pagination
-    const products = await Products1.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip);
+    const products = await Products1.find(find)
+        .sort({position: 'desc'})
+        // asc là tăng dần và dsc là giảm dần
+        .limit(objectPagination.limitItem)
+        .skip(objectPagination.skip);
     res.render("admin/page/product/index.pug", {
         pageTitleAdmin: "Trang Chủ ",
         products: products,
@@ -75,7 +79,7 @@ module.exports.changeMulti = async (req, res) => {
             break;
         
         case "delete-all":
-            await Products1.updateMany({_id:{$in:ids}} ,
+            await Products1.deleteMany({_id:{$in:ids}} ,
                  {
                     deleted:true,
                     deleteAt: new Date()
@@ -83,6 +87,15 @@ module.exports.changeMulti = async (req, res) => {
                 req.flash('info', `xóa thành công  ${ids.length} sản phẩm `);
 
             break;
+        case "change-position":
+            for (const item of ids){
+                // console.log(item.split("-"))
+                const [id , position] = item.split("-")
+                // console.log(position)
+                // console.log(id)
+                await Products1.updateOne({ _id: id }, { position: position })
+
+            }
 
 
         

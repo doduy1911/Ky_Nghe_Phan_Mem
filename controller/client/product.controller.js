@@ -3,10 +3,11 @@ const Products1 = require("../../model/products1.model.BE_24.js")
 module.exports.index = async  (req,res) => {
     let find = {
         status : "active",
+        deleted: false
 
 
     }
-    const product =  await Products1.find(find)
+    const product =  await Products1.find(find).sort({position: 'desc'})
 
     const newProducts = product.map(item => {
         item.priceNew = ((item.price * (100 - item.discountPercentage)) / 100).toFixed(0);

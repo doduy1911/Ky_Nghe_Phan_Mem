@@ -143,10 +143,17 @@ if(formChangeMulti){
             const inputIds = formChangeMulti.querySelector("input[name='ids']")
 
             inputChecked.forEach(input => {
-                ids.push(input.value)
+                const id = input.value;
+
+                if(typeChange == "change-position"){
+                    const position = input.closest("tr").querySelector("input[name='position']").value
+                    ids.push(`${id}-${position}`)
+                }else{
+                ids.push(id)}
             })
-            // console.log(ids)
+            
             inputIds.value = ids.join(",")
+            // console.log(ids)
 
             formChangeMulti.submit()
 
